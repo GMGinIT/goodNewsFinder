@@ -161,6 +161,19 @@ class AuthController {
         .json(formatResponse(500, 'Internal server error', null, message));
     }
   }
+
+  static async signOut(req, res) {
+    try {
+      res
+        .clearCookie('refreshToken')
+        .json(formatResponse(200, 'Logout successfully'));
+    } catch ({ message }) {
+      console.error(message);
+      res
+        .status(500)
+        .json(formatResponse(500, 'Internal server error', null, message));
+    }
+  }
 }
 
 module.exports = AuthController;
