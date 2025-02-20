@@ -2,10 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
+const indexRoutes = require("./routes/index.routes");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
+
+serverConfig(app);
+app.use('/api', indexRouter);
+
 
 async function scrapeRiaNews(keyword) {
   const url = `https://ria.ru/search/?query=${encodeURIComponent(keyword)}`;
