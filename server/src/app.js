@@ -2,10 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const cheerio = require("cheerio");
+const indexRoutes = require("./routes/index.routes");
 
 const app = express();
 const port = 3000;
 
+app.use("/api", indexRoutes);
 app.use(cors());
 
 async function scrapeRiaNews(keyword) {
