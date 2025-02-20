@@ -1,4 +1,4 @@
-const cookiesConfig = require('../config/cookiesConfig');
+// const cookiesConfig = require('../config/cookiesConfig');
 const UserService = require('../services/Auth.services');
 const AuthValidator = require('../utils/Auth.validator');
 const formatResponse = require('../utils/formatResponse');
