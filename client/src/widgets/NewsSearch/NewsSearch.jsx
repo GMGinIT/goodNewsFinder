@@ -4,7 +4,7 @@ const NewsSearch = ({ setKeyword }) => {
   const [inputKeyword, setInputKeyword] = useState("");
 
   const handleSearch = () => {
-    setKeyword(inputKeyword); 
+    setKeyword(inputKeyword);
   };
 
   return (

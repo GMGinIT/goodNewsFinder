@@ -1,31 +1,30 @@
-// const cookiesConfig = require('../config/cookiesConfig');
+const cookiesConfig = require('../config/cookiesConfig');
 const UserService = require('../services/Auth.services');
 const AuthValidator = require('../utils/Auth.validator');
 const formatResponse = require('../utils/formatResponse');
 const bcrypt = require('bcrypt');
-// const generateTokens = require('../utils/generateTokens')
-// const cookiesConfig = require('../config/cookiesConfig')
+const generateTokens = require('../utils/generateTokens');
 
 class AuthController {
-  // static async refreshTokens(req, res) {
-  //     try {
-  //       const { user } = res.locals;
+  static async refreshTokens(req, res) {
+    try {
+      const { user } = res.locals;
 
-  //       const { accessToken, refreshToken } = generateTokens({ user });
+      const { accessToken, refreshToken } = generateTokens({ user });
 
-  //       res.status(200).cookie('refreshToken', refreshToken, cookiesConfig).json(
-  //         formatResponse(200, 'Successfully regenerate tokens', {
-  //           user,
-  //           accessToken,
-  //         })
-  //       );
-  //     } catch ({ message }) {
-  //       console.error(message);
-  //       res
-  //         .status(500)
-  //         .json(formatResponse(500, 'Internal server error', null, message));
-  //     }
-  //   }
+      res.status(200).cookie('refreshToken', refreshToken, cookiesConfig).json(
+        formatResponse(200, 'Successfully regenerate tokens', {
+          user,
+          accessToken,
+        })
+      );
+    } catch ({ message }) {
+      console.error(message);
+      res
+        .status(500)
+        .json(formatResponse(500, 'Internal server error', null, message));
+    }
+  }
 
   static async signUp(req, res) {
     const { username, email, password } = req.body;
@@ -43,6 +42,7 @@ class AuthController {
     }
 
     const normalizedEmail = email.toLowerCase();
+
     try {
       const userFound = await UserService.getByEmail({ email });
 
@@ -83,14 +83,14 @@ class AuthController {
       const plainUser = newUser.get({ plain: true });
       delete plainUser.password;
 
-      //   const { accessToken, refreshToken } = generateTokens({ user: plainUser});
+      const { accessToken, refreshToken } = generateTokens({ user: plainUser });
       res
         .status(201)
-        //   .cookie('refreshToken', refreshToken, cookiesConfig)
+        .cookie('refreshToken', refreshToken, cookiesConfig)
         .json(
           formatResponse(201, 'Registration successful', {
             user: plainUser,
-            //accessToken,
+            accessToken,
           })
         );
     } catch ({ message }) {
@@ -114,11 +114,10 @@ class AuthController {
         .status(400)
         .json(formatResponse(400, 'Validation error', null, error));
     }
-    const normalizedEmail = email.toLowerCase();
 
+    const normalizedEmail = email.toLowerCase();
     try {
       const user = await UserService.getByEmail(normalizedEmail);
-
       if (!user) {
         return res
           .status(400)
@@ -143,15 +142,15 @@ class AuthController {
       const plainUser = user.get({ plain: true });
       delete plainUser.password;
 
-      //   const { accessToken, refreshToken } = generateTokens({ user: plainUser });
+      const { accessToken, refreshToken } = generateTokens({ user: plainUser });
 
       res
         .status(200)
-        //   .cookie('refreshToken', refreshToken, cookiesConfig)
+        .cookie('refreshToken', refreshToken, cookiesConfig)
         .json(
           formatResponse(200, 'Login OK', {
             user: plainUser,
-            // accessToken,
+            accessToken,
           })
         );
     } catch ({ message }) {

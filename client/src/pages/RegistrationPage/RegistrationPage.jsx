@@ -1,7 +1,10 @@
-import React from 'react';
+import SignUpForm from '../../features/SignUpForm/SignUpForm';
+
 
 function RegistrationPage({ setUser }) {
-  return <div>Registration Page</div>;
+  return (
+  <SignUpForm setUser={setUser}>Registration Page</SignUpForm>
+  )
 }
 
 export default RegistrationPage;

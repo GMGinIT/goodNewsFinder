@@ -1,9 +1,9 @@
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const morgan = require("morgan"); //* библиотека позволяющая выводить запросы в лог
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const morgan = require('morgan'); //* библиотека позволяющая выводить запросы в лог
 // const removeHTTPHeader = require('../middleware/removeHeader'); //* наша кастомная мидлварка
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 
 //NOTE: функция serverConfig, принимающая экземпляр приложения и возвращающая обученный экземпляр
 
@@ -20,7 +20,7 @@ const serverConfig = (app) => {
   app.use(express.json());
 
   //* логирует данные о запросах на сервер
-  app.use(morgan("dev"));
+  app.use(morgan('dev'));
 
   app.use(cors(corsOptions));
 
@@ -32,8 +32,8 @@ const serverConfig = (app) => {
 
   //* настройка статики, папка public ассоциирована с маршрутом запроса
   app.use(
-    "/static/images",
-    express.static(path.resolve(__dirname, "..", "public", "images"))
+    '/static/images',
+    express.static(path.resolve(__dirname, '..', 'public', 'images'))
   );
 };
 
