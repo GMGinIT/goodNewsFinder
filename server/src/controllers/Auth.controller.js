@@ -42,9 +42,9 @@ class AuthController {
     }
 
     const normalizedEmail = email.toLowerCase();
-
+    
     try {
-      const userFound = await UserService.getByEmail({ email });
+      const userFound = await UserService.getByEmail(email);
 
       if (userFound) {
         return res
@@ -64,9 +64,9 @@ class AuthController {
       const newUser = await UserService.create({
         username,
         password: hashedPassword,
-        email: normalizedEmail,
+        email: normalizedEmail
       });
-
+      
       if (!newUser) {
         return res
           .status(400)

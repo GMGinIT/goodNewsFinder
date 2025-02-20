@@ -5,6 +5,7 @@ class UserService {
   }
 
   static async create(userData) {
+    console.log('>>>>>>>>>>>>', userData)
     return await User.create(userData);
   }
 }
