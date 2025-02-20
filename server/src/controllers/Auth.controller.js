@@ -114,11 +114,10 @@ class AuthController {
         .status(400)
         .json(formatResponse(400, 'Validation error', null, error));
     }
-    const normalizedEmail = email.toLowerCase();
 
+    const normalizedEmail = email.toLowerCase();
     try {
       const user = await UserService.getByEmail(normalizedEmail);
-
       if (!user) {
         return res
           .status(400)

@@ -1,11 +1,8 @@
-// import RegistrationPage from '../../pages/RegistrationPage/RegistrationPage';
-// import LoginPage from '../../pages/LoginPage/LoginPage';
 import { NavLink } from 'react-router';
 import styles from './Nav.module.css';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import UserApi from '../../entities/User/UserApi';
-
 
 export default function Nav({ user, setUser }) {
     const navigate = useNavigate();
@@ -19,7 +16,7 @@ export default function Nav({ user, setUser }) {
               confirmButtonText: 'Да, выйти',
               cancelButtonText: 'Отмена',
             });
-      
+            
             if (result.isConfirmed) {
               const { statusCode, message, error } = await UserApi.signOut();
       
@@ -41,7 +38,10 @@ export default function Nav({ user, setUser }) {
 
     return (
     <nav className={styles.container}>
-      <div className={styles.goodnews}><NavLink to='/'>Good News</NavLink></div>
+      <div className={styles.goodnews}><NavLink to='/'>Good News
+      </NavLink>
+      <div style={{ fontSize: '20px', color: 'white' }}>ваш новостной агрегатор</div>
+      </div>
       {!user && (
 
       <div className={styles.authcontainer}>
@@ -52,7 +52,7 @@ export default function Nav({ user, setUser }) {
       {user && (
         <div className={styles.authcontainer}>
             <NavLink to='/'>{user.username}</NavLink>
-            <NavLink to='/favorites'>Favorites</NavLink>
+            <NavLink to='/favorites'>Избранное</NavLink>
             <NavLink to='/' onClick={signOutHandler}>Выход</NavLink>
 
         </div>

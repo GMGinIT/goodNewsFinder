@@ -11,7 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    UserApi.refreshTokens().then(console.log);
+    // UserApi.refreshTokens().then(console.log);
     UserApi.refreshTokens()
       .then(({ error, data, statusCode, message }) => {
         

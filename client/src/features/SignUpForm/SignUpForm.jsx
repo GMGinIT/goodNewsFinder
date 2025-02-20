@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './SignUpForm.module.css';
+import styles from '../../shared/ui/Regforms.module.css';
 import UserValidator from '../../entities/User/User.validator';
 import { setAccessToken } from '../../shared/lib/axiosInstance';
 import { useNavigate } from 'react-router';
