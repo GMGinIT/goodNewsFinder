@@ -9,10 +9,8 @@ export default function MainPage() {
 
   const fetchNews = async (searchKeyword) => {
     setLoading(true);
-    console.log(`Отправка запроса с ключевым словом: ${searchKeyword}`);
     try {
       const response = await axios.get(`/api/search?keyword=${searchKeyword}`);
-      console.log("Ответ от сервера:", response.data);
       setNews(response.data);
     } catch (error) {
       console.error("Ошибка при получении новостей:", error.message);
@@ -32,7 +30,6 @@ export default function MainPage() {
   }, [keyword]);
 
   const handleSearch = (newKeyword) => {
-    console.log(`Обновление ключевого слова: ${newKeyword}`);
     setKeyword(newKeyword);
   };
 
