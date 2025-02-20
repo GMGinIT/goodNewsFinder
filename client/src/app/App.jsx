@@ -1,33 +1,33 @@
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
-// import UserApi from '../entities/User/UserApi'
+import UserApi from '../entities/User/UserApi'
 import { BrowserRouter, Route, Routes } from "react-router";
 // import MainPage from "./pages/MainPage/MainPage";
-import Layout from "./widgets/Layout/Layout";
+import Layout from "../widgets/Layout/Layout";
 import { useEffect, useState } from "react";
-// import { setAccessToken } from "../shared/lib/axiosInstance";
+import { setAccessToken } from "../shared/lib/axiosInstance";
 
 function App() {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   UserApi.refreshTokens().then(console.log);
-  //   UserApi.refreshTokens()
-  //     .then(({ error, data, statusCode, message }) => {
-  //       
-  //       if (error) {
-  //         setUser(null);
-  //         return;
-  //       }
-  //       if (statusCode === 200) {
-  //         setUser(data.user);
-  //         setAccessToken(data.accessToken);
-  //       }
-  //     })
-  //     .catch(({ message }) => {
-  //       console.log(message);
-  //     });
-  // }, []);
+  useEffect(() => {
+    UserApi.refreshTokens().then(console.log);
+    UserApi.refreshTokens()
+      .then(({ error, data, statusCode, message }) => {
+        
+        if (error) {
+          setUser(null);
+          return;
+        }
+        if (statusCode === 200) {
+          setUser(data.user);
+          setAccessToken(data.accessToken);
+        }
+      })
+      .catch(({ message }) => {
+        console.log(message);
+      });
+  }, []);
 
   return (
     <BrowserRouter>
