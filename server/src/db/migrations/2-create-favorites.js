@@ -18,7 +18,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       newsId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
