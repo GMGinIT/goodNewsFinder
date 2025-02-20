@@ -3,7 +3,7 @@ import LoginPage from '../pages/LoginPage/LoginPage'
 // import UserApi from '../entities/User/UserApi'
 import { BrowserRouter, Route, Routes } from "react-router";
 // import MainPage from "./pages/MainPage/MainPage";
-import Layout from "./widgets/Layout/Layout";
+import Layout from "../widgets/Layout/Layout";
 import { useEffect, useState } from "react";
 // import { setAccessToken } from "../shared/lib/axiosInstance";
 
