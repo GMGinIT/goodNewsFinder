@@ -3,7 +3,9 @@ const { formatResponse } = require("../utils/formatResponse");
 
 class FavoriteController {
   static async addFavorite(req, res) {
-    const { userId, newsId } = req.body;
+    const { userId, newsId } = req.params;
+    console.log();
+
     try {
       const newFav = await FavoriteService.addFav({ userId, newsId });
       res.status(201).json(formatResponse(201, "success", newFav));
@@ -16,9 +18,9 @@ class FavoriteController {
   }
 
   static async deleteFromFav(req, res) {
-    const { userId, newsId } = req.body;
+    const { userId, newsId } = req.params;
     try {
-      const deletedFav = await FavoriteService.deleteFav({ userId, newsId });
+      const deletedFav = await FavoriteService.deleteFav(userId, newsId);
       res.status(200).json(formatResponse(200, "success", deletedFav));
     } catch ({ message }) {
       console.error(message);
