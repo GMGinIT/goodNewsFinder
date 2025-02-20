@@ -5,6 +5,7 @@ class FavoriteService {
     const existingFav = await Favorite.findOne({ where: { userId, newsId } });
     if (existingFav) {
       throw new Error("новость уже добавлена в избранное");
+       throw new Error("новость уже добавлена в избранное");
     }
     return await Favorite.create({ userId, newsId });
   }

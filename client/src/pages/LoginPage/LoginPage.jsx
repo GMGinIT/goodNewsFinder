@@ -1,7 +1,9 @@
-import React from 'react';
+import SignInForm from '../../features/SignInForm/SignInForm';
 
 function LoginPage({ setUser }) {
-  return <div>LoginPage</div>;
+  return (
+  <SignInForm setUser={setUser}>Login Page</SignInForm>
+  )
 }
 
 export default LoginPage;
