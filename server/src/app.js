@@ -4,7 +4,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
 app.use(cors());
 
@@ -43,6 +43,6 @@ app.get("/api/search", async (req, res) => {
   res.json(articles);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
