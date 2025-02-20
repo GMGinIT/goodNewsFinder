@@ -2,28 +2,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NewsSearch from "../../widgets/NewsSearch/NewsSearch";
 
-export default function MainPage({ user, setUser }) {
+export default function MainPage() {
   const [news, setNews] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const fetchNews = async (searchKeyword) => {
+    setLoading(true);
+    console.log(`Отправка запроса с ключевым словом: ${searchKeyword}`);
+    try {
+      const response = await axios.get(`/api/search?keyword=${searchKeyword}`);
+      console.log("Ответ от сервера:", response.data);
+      setNews(response.data);
+    } catch (error) {
+      console.error("Ошибка при получении новостей:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      if (keyword) {
-        try {
-          const response = await axios.get(
-            `http://localhost:3000/api/search?keyword=${keyword}`
-          );
-          setNews(response.data);
-        } catch (error) {
-          console.error("Ошибка при получении новостей:", error);
-        }
-      }
-    };
+    fetchNews("top headlines");
+  }, []);
 
-    fetchNews();
+  useEffect(() => {
+    if (keyword) {
+      fetchNews(keyword);
+    }
   }, [keyword]);
 
   const handleSearch = (newKeyword) => {
+    console.log(`Обновление ключевого слова: ${newKeyword}`);
     setKeyword(newKeyword);
   };
 
@@ -31,6 +40,10 @@ export default function MainPage({ user, setUser }) {
     <>
       <h1>Новости</h1>
       <NewsSearch setKeyword={handleSearch} />
+      {loading && <p>Загрузка...</p>}
+      {news.length === 0 && keyword && (
+        <p>Новости не найдены для ключевого слова: "{keyword}"</p>
+      )}
       <ul>
         {news.map((article, index) => (
           <li key={index}>
