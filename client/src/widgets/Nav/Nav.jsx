@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import UserApi from '../../entities/User/UserApi';
 
+
 export default function Nav({ user, setUser }) {
     const navigate = useNavigate();
     async function signOutHandler() {

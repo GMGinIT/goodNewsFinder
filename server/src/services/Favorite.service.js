@@ -4,6 +4,7 @@ class FavoriteService {
   static async addFav({ userId, newsId }) {
     const existingFav = await Favorite.findOne({ where: { userId, newsId } });
     if (existingFav) {
+      throw new Error("новость уже добавлена в избранное");
        throw new Error("новость уже добавлена в избранное");
     }
     return await Favorite.create({ userId, newsId });
@@ -14,7 +15,7 @@ class FavoriteService {
       await favorite.destroy();
       return favorite;
     }
-     throw new Error("новость не найдена в избранном");
+    throw new Error("новость не найдена в избранном");
   }
   static async getFav(userId) {
     return await Favorite.findAll({ where: { userId } });
