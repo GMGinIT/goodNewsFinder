@@ -3,14 +3,14 @@ const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const indexRoutes = require("./routes/index.routes");
+const serverConfig = require("./config/serverConfig");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
 serverConfig(app);
-app.use('/api', indexRouter);
-
+app.use("/api", indexRoutes);
 
 async function scrapeRiaNews(keyword) {
   const url = `https://ria.ru/search/?query=${encodeURIComponent(keyword)}`;
