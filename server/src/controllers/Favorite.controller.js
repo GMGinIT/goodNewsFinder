@@ -19,7 +19,7 @@ class FavoriteController {
     const { userId, newsId } = req.body;
     try {
       const deletedFav = await FavoriteService.deleteFav({ userId, newsId });
-      res.status(200).json(formatResponse(201, "success", deletedFav));
+      res.status(200).json(formatResponse(200, "success", deletedFav));
     } catch ({ message }) {
       console.error(message);
       res
