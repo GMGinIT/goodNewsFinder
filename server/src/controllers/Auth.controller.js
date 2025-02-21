@@ -42,7 +42,7 @@ class AuthController {
     }
 
     const normalizedEmail = email.toLowerCase();
-    
+
     try {
       const userFound = await UserService.getByEmail(email);
 
@@ -64,9 +64,9 @@ class AuthController {
       const newUser = await UserService.create({
         username,
         password: hashedPassword,
-        email: normalizedEmail
+        email: normalizedEmail,
       });
-      
+
       if (!newUser) {
         return res
           .status(400)
@@ -173,6 +173,52 @@ class AuthController {
         .json(formatResponse(500, 'Internal server error', null, message));
     }
   }
+
+  static async addGoodTag(req, res) {
+    const { goodTag, userId } = req.body;
+    console.log(goodTag, userId, '<<<<<<<<<<<<<<<<<<<')
+    try {
+      const addTag = await UserService.addGoodTag( goodTag, userId );
+      if (!addTag) {
+        return res
+          .status(400)
+          .json(
+            formatResponse(400, 'Error adding tag', null, 'Error adding tag')
+          );
+      }
+
+      res
+        .status(201)
+        .json(formatResponse(201, 'Tag successfully added', addTag));
+    } catch ({ message }) {
+      res
+        .status(500)
+        .json(formatResponse(500, 'Internal server error', null, message));
+    }
+  }
+
+  static async addBadTag(req, res) {
+    const { badTag, userId } = req.body;
+    try {
+      const addTag = await UserService.addBadTag( badTag, userId );
+      if (!addTag) {
+        return res
+          .status(400)
+          .json(
+            formatResponse(400, 'Error adding tag', null, 'Error adding tag')
+          );
+      }
+
+      res
+        .status(201)
+        .json(formatResponse(201, 'Tag successfully added', addTag));
+    } catch ({ message }) {
+      res
+        .status(500)
+        .json(formatResponse(500, 'Internal server error', null, message));
+    }
+  }
+
 }
 
 module.exports = AuthController;
