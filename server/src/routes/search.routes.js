@@ -13,7 +13,7 @@ async function scrapeRiaNews(keyword) {
     const html = response.data;
     const $ = cheerio.load(html);
 
-    const articles = [];
+    const articles = []; 
 
     $(".list-item").each((i, element) => {
       const title = $(element).find(".list-item__title").text().trim() || "";
