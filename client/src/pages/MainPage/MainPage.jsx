@@ -29,26 +29,22 @@ export default function MainPage() {
     }
   }, [keyword]);
 
-  const handleSearch = (newKeyword) => {
-    setKeyword(newKeyword);
-  };
-
   return (
     <>
       <h1>Новости</h1>
-      <NewsSearch setKeyword={handleSearch} />
+      <NewsSearch setKeyword={setKeyword} />
       {loading && <p>Загрузка...</p>}
       {news.length === 0 && keyword && (
         <p>Новости не найдены для ключевого слова: "{keyword}"</p>
       )}
       <ul>
-        {news.map((article, index) => (
-          <li key={index}>
+        {news.map((article) => (
+          <li key={article.newsId}>
+            {" "}
+            {/* Используем newsId в качестве ключа */}
             <h3>{article.title}</h3>
             <p>{article.content}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
-              Читать далее
-            </a>
+            {/* Убрали ссылки */}
           </li>
         ))}
       </ul>
