@@ -1,24 +1,20 @@
-const path = require('path'); //* Импорт библиотеки path
-require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') }); //* Подключение переменных окружения
-const express = require('express'); //* Импорт библиотеки express
-const serverConfig = require('./config/serverConfig');
-const indexRouter = require('./routes/index.routes');
+const path = require("path"); //* Импорт библиотеки path
+require("dotenv").config({ path: path.resolve(__dirname, "..", ".env") }); //* Подключение переменных окружения
+const express = require("express"); //* Импорт библиотеки express
+const serverConfig = require("./config/serverConfig");
+const indexRouter = require("./routes/index.routes");
 const axios = require("axios");
 const cheerio = require("cheerio");
-const indexRoutes = require("./routes/index.routes");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
-
 serverConfig(app);
-app.use('/api', indexRouter);
-
+app.use("/api", indexRouter);
 
 async function scrapeRiaNews(keyword) {
   const url = `https://ria.ru/search/?query=${encodeURIComponent(keyword)}`;
-
 
   try {
     console.log("Отправка запроса к:", url);
