@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FavoriteList({ favorites, removeFromFav }) {
   if (favorites.length === 0) {
-    return <p>Нет избранных новостей</p>;
+    return <p>Нет избранных новостей! </p>;
   }
   return (
     <div>
