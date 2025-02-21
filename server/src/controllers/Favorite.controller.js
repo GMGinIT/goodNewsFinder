@@ -1,10 +1,10 @@
 const FavoriteService = require("../services/Favorite.service");
-const { formatResponse } = require("../utils/formatResponse");
+const formatResponse = require("../utils/formatResponse");
 
 class FavoriteController {
   static async addFavorite(req, res) {
     const { userId, newsId } = req.params;
-    console.log();
+    console.log(userId, newsId, "222222222222222222");
 
     try {
       const newFav = await FavoriteService.addFav({ userId, newsId });
